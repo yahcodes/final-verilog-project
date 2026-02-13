@@ -148,7 +148,105 @@ module game_top (
                 err_no_inventory   <= 1'b0;
                 err_wrong_distance <= 1'b0;
                 if (play_valid) begin
-                    // STUB: Plan 02 fills in action logic here
+                    if (turn == 1'b0) begin // P1 active
+                        case (play_action)
+                            ACT_KICK: begin
+                                if (p1_moves[0] == 4'd0) begin
+                                    err_no_inventory <= 1'b1;
+                                end else begin
+                                    p1_moves[0] <= p1_moves[0] - 4'd1;
+                                    if (distance == 3'd1)
+                                        p2_health <= p2_health - 2'd1;
+                                    else
+                                        err_wrong_distance <= 1'b1;
+                                end
+                            end
+                            ACT_PUNCH: begin
+                                if (p1_moves[1] == 4'd0) begin
+                                    err_no_inventory <= 1'b1;
+                                end else begin
+                                    p1_moves[1] <= p1_moves[1] - 4'd1;
+                                    if (distance == 3'd0)
+                                        p2_health <= p2_health - 2'd2;
+                                    else
+                                        err_wrong_distance <= 1'b1;
+                                end
+                            end
+                            ACT_LEFT: begin
+                                if (p1_moves[2] == 4'd0) begin
+                                    err_no_inventory <= 1'b1;
+                                end else begin
+                                    p1_moves[2] <= p1_moves[2] - 4'd1;
+                                    if (p1_pos < 2'd2) p1_pos <= p1_pos + 2'd1;
+                                end
+                            end
+                            ACT_RIGHT: begin
+                                if (p1_moves[3] == 4'd0) begin
+                                    err_no_inventory <= 1'b1;
+                                end else begin
+                                    p1_moves[3] <= p1_moves[3] - 4'd1;
+                                    if (p1_pos > 2'd0) p1_pos <= p1_pos - 2'd1;
+                                end
+                            end
+                            ACT_WAIT: begin
+                                if (p1_moves[4] == 4'd0) begin
+                                    err_no_inventory <= 1'b1;
+                                end else begin
+                                    p1_moves[4] <= p1_moves[4] - 4'd1;
+                                end
+                            end
+                            default: ; // invalid action, do nothing
+                        endcase
+                    end else begin // P2 active
+                        case (play_action)
+                            ACT_KICK: begin
+                                if (p2_moves[0] == 4'd0) begin
+                                    err_no_inventory <= 1'b1;
+                                end else begin
+                                    p2_moves[0] <= p2_moves[0] - 4'd1;
+                                    if (distance == 3'd1)
+                                        p1_health <= p1_health - 2'd1;
+                                    else
+                                        err_wrong_distance <= 1'b1;
+                                end
+                            end
+                            ACT_PUNCH: begin
+                                if (p2_moves[1] == 4'd0) begin
+                                    err_no_inventory <= 1'b1;
+                                end else begin
+                                    p2_moves[1] <= p2_moves[1] - 4'd1;
+                                    if (distance == 3'd0)
+                                        p1_health <= p1_health - 2'd2;
+                                    else
+                                        err_wrong_distance <= 1'b1;
+                                end
+                            end
+                            ACT_LEFT: begin
+                                if (p2_moves[2] == 4'd0) begin
+                                    err_no_inventory <= 1'b1;
+                                end else begin
+                                    p2_moves[2] <= p2_moves[2] - 4'd1;
+                                    if (p2_pos > 2'd0) p2_pos <= p2_pos - 2'd1;
+                                end
+                            end
+                            ACT_RIGHT: begin
+                                if (p2_moves[3] == 4'd0) begin
+                                    err_no_inventory <= 1'b1;
+                                end else begin
+                                    p2_moves[3] <= p2_moves[3] - 4'd1;
+                                    if (p2_pos < 2'd2) p2_pos <= p2_pos + 2'd1;
+                                end
+                            end
+                            ACT_WAIT: begin
+                                if (p2_moves[4] == 4'd0) begin
+                                    err_no_inventory <= 1'b1;
+                                end else begin
+                                    p2_moves[4] <= p2_moves[4] - 4'd1;
+                                end
+                            end
+                            default: ; // invalid action, do nothing
+                        endcase
+                    end
                 end
             end
 
