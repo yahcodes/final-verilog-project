@@ -5,33 +5,33 @@
 See: .planning/PROJECT.md (updated 2026-02-13)
 
 **Core value:** Correctly simulate FSM-based 2-player fighting game with shop, in plain Verilog with $display output
-**Current focus:** Phase 2 - Game Core
+**Current focus:** Phase 2 - Game Core (complete)
 
 ## Current Position
 
 Phase: 2 of 4 (Game Core)
-Plan: 1 of 2 in current phase
-Status: In progress
-Last activity: 2026-02-13 - Completed 02-01-PLAN.md (game_top.v skeleton)
+Plan: 2 of 2 in current phase
+Status: Phase complete
+Last activity: 2026-02-13 - Completed 02-02-PLAN.md (PLAY phase action logic + testbench)
 
-Progress: [██░░░░░░░░] 20%
+Progress: [████░░░░░░] 40%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 2
-- Average duration: ~1 min
-- Total execution time: ~2 min
+- Total plans completed: 3
+- Average duration: ~4 min
+- Total execution time: ~11 min
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 01-shop-module | 1 | 1 | ~1 min |
-| 02-game-core   | 1/2  | 1 | ~1 min |
+| 01-shop-module | 1/1 | ~1 min | ~1 min |
+| 02-game-core   | 2/2 | ~10 min | ~5 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01, 02-01
+- Last 5 plans: 01-01, 02-01, 02-02
 - Trend: on track
 
 *Updated after each plan completion*
@@ -51,17 +51,20 @@ Recent decisions affecting current work:
 - [02-01]: distance wire is 3 bits to hold range 0..4 without overflow
 - [02-01]: shop credit_next/grant_onehot connected as wires in game_top
 - [02-01]: discount_mult hardcoded to 7'd100 for Phase 2 (no discount)
+- [02-02]: inventory decremented BEFORE distance check (wrong-distance attacks still consume inventory)
+- [02-02]: buy task requires 2 posedge cycles (grant latches in shop on edge N, game_top reads on edge N+1)
+- [02-02]: health underflow not guarded in PLAY phase (Phase 3 handles win detection)
 
 ### Pending Todos
 
-None yet.
+None.
 
 ### Blockers/Concerns
 
-None yet.
+None.
 
 ## Session Continuity
 
 Last session: 2026-02-13
-Stopped at: Completed 02-01 (game_top.v skeleton with registers and shop wiring)
-Resume file: .planning/phases/02-game-core/02-02-PLAN.md
+Stopped at: Completed 02-02 (PLAY phase action logic + tb_game_core.v)
+Resume file: .planning/phases/03-win-detection/ (next phase)
