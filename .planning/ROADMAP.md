@@ -58,11 +58,11 @@ Plans:
   2. The moves_to_win counter increments by exactly 1 for each valid move executed during PLAY (invalid/no-op moves do not increment it)
   3. On a start_round pulse, both players' health resets to 3, credit to 500, position to 2, all move inventories to 0, moves_to_win to 0, and phase to PLAY
   4. In the SHOP phase following a win, the winner's shop prices reflect the discount: 20% off (mult=80) for moves_to_win <= 6, 10% off (mult=90) for 7-9, 5% off (mult=95) for 10+; the loser pays full price (mult=100)
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 03-01: Implement win detection, winner latch, moves_to_win counter, and start_round restart logic in game_top.v
-- [ ] 03-02: Implement discount mux in shop.v wired to moves_to_win and winner identity; verify loser always gets mult=100
+- [ ] 03-01-PLAN.md — Win detection, moves_to_win counter, start_round restart in game_top.v
+- [ ] 03-02-PLAN.md — Discount mux in game_top.v, wire to shops, tb_phase3.v verification
 
 ### Phase 4: Display and Testbench
 **Goal**: Every simulation tick and shop event is logged via $display, and tb_game.v exercises all specified scenarios with visible pass/fail output
