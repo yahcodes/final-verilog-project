@@ -28,10 +28,10 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. ActionNumber 5-7 triggers err_invalid_action with no change to credit or inventory
   3. A purchase attempt when credit < item price triggers err_credit with no change to credit or inventory
   4. A purchase attempt when shop stock = 0 triggers err_out_of_stock with no change to credit or inventory
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] 01-01: Implement shop.v with localparams, mux pricing, buy_valid logic, and all error outputs
+- [ ] 01-01-PLAN.md — Implement shop.v (purchase logic, error outputs, discount, stock) and tb_shop.v (standalone verification)
 
 ### Phase 2: Game Core
 **Goal**: Two players can take turns executing moves (Kick, Punch, MoveLeft, MoveRight, Wait) with correct distance-based damage, position saturation, inventory enforcement, and turn switching
@@ -43,11 +43,11 @@ Plans:
   3. MoveLeft and MoveRight adjust the active player's position register with saturation (clamped at 0 and 2, no wrap)
   4. Executing any action with that move's counter at 0 triggers an error and changes no state; executing with counter > 0 decrements that move's counter by 1
   5. Wait consumes one Wait counter but leaves all position and health state unchanged
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 02-01: Implement game_top.v FSM skeleton with PLAY/SHOP phases, health registers, position registers, and turn signal
-- [ ] 02-02: Implement attack logic (Kick/Punch with distance check) and movement logic (MoveLeft/MoveRight with saturation) and Wait; wire in move inventory enforcement
+- [ ] 02-01-PLAN.md — Create game_top.v skeleton with registers, shop wiring, SHOP phase logic
+- [ ] 02-02-PLAN.md — Implement PLAY phase action logic (attack, movement, wait, inventory) and verification TB
 
 ### Phase 3: Win, Restart, and Extra Credit
 **Goal**: The game detects wins, supports full round restart, and applies a correct discount to the winner's next shop prices based on moves_to_win
