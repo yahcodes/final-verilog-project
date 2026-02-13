@@ -50,6 +50,8 @@ module game_top (
     reg [3:0] p1_moves [0:4];
     reg [3:0] p2_moves [0:4];
 
+    reg [3:0] moves_to_win;
+
     // Combinational: distance between players
     wire [2:0] distance;
     assign distance = {1'b0, p1_pos} + {1'b0, p2_pos};
@@ -123,6 +125,7 @@ module game_top (
             p2_moves[3]        <= 4'd0;
             p2_moves[4]        <= 4'd0;
             winner             <= 2'b00;
+            moves_to_win       <= 4'd0;
             err_no_inventory   <= 1'b0;
             err_wrong_distance <= 1'b0;
         end else begin
@@ -143,7 +146,11 @@ module game_top (
                 if (p2_grant_onehot[3]) p2_moves[3] <= p2_moves[3] + 4'd1;
                 if (p2_grant_onehot[4]) p2_moves[4] <= p2_moves[4] + 4'd1;
                 // SHOP -> PLAY transition
-                if (start_round) phase <= PHASE_PLAY;
+                if (start_round) begin
+                    phase <= PHASE_PLAY;
+                    winner <= 2'b00;
+                    moves_to_win <= 4'd0;
+                end
             end else begin // PHASE_PLAY
                 err_no_inventory   <= 1'b0;
                 err_wrong_distance <= 1'b0;
@@ -154,28 +161,59 @@ module game_top (
                                 if (p1_moves[0] == 4'd0) begin
                                     err_no_inventory <= 1'b1;
                                 end else begin
+                                    moves_to_win <= moves_to_win + 4'd1;
                                     p1_moves[0] <= p1_moves[0] - 4'd1;
-                                    if (distance == 3'd1)
-                                        p2_health <= p2_health - 2'd1;
-                                    else
+                                    if (distance == 3'd1) begin
+                                        if (p2_health <= 2'd1) begin
+                                            phase <= PHASE_SHOP;
+                                            winner <= 2'b01;
+                                            p1_health <= 2'd3;
+                                            p2_health <= 2'd3;
+                                            p1_credit <= 10'd500;
+                                            p2_credit <= 10'd500;
+                                            p1_pos <= 2'd2;
+                                            p2_pos <= 2'd2;
+                                            p1_moves[0] <= 4'd0; p1_moves[1] <= 4'd0; p1_moves[2] <= 4'd0; p1_moves[3] <= 4'd0; p1_moves[4] <= 4'd0;
+                                            p2_moves[0] <= 4'd0; p2_moves[1] <= 4'd0; p2_moves[2] <= 4'd0; p2_moves[3] <= 4'd0; p2_moves[4] <= 4'd0;
+                                        end else begin
+                                            p2_health <= p2_health - 2'd1;
+                                        end
+                                    end else begin
                                         err_wrong_distance <= 1'b1;
+                                    end
                                 end
                             end
                             ACT_PUNCH: begin
                                 if (p1_moves[1] == 4'd0) begin
                                     err_no_inventory <= 1'b1;
                                 end else begin
+                                    moves_to_win <= moves_to_win + 4'd1;
                                     p1_moves[1] <= p1_moves[1] - 4'd1;
-                                    if (distance == 3'd0)
-                                        p2_health <= p2_health - 2'd2;
-                                    else
+                                    if (distance == 3'd0) begin
+                                        if (p2_health <= 2'd2) begin
+                                            phase <= PHASE_SHOP;
+                                            winner <= 2'b01;
+                                            p1_health <= 2'd3;
+                                            p2_health <= 2'd3;
+                                            p1_credit <= 10'd500;
+                                            p2_credit <= 10'd500;
+                                            p1_pos <= 2'd2;
+                                            p2_pos <= 2'd2;
+                                            p1_moves[0] <= 4'd0; p1_moves[1] <= 4'd0; p1_moves[2] <= 4'd0; p1_moves[3] <= 4'd0; p1_moves[4] <= 4'd0;
+                                            p2_moves[0] <= 4'd0; p2_moves[1] <= 4'd0; p2_moves[2] <= 4'd0; p2_moves[3] <= 4'd0; p2_moves[4] <= 4'd0;
+                                        end else begin
+                                            p2_health <= p2_health - 2'd2;
+                                        end
+                                    end else begin
                                         err_wrong_distance <= 1'b1;
+                                    end
                                 end
                             end
                             ACT_LEFT: begin
                                 if (p1_moves[2] == 4'd0) begin
                                     err_no_inventory <= 1'b1;
                                 end else begin
+                                    moves_to_win <= moves_to_win + 4'd1;
                                     p1_moves[2] <= p1_moves[2] - 4'd1;
                                     if (p1_pos < 2'd2) p1_pos <= p1_pos + 2'd1;
                                 end
@@ -184,6 +222,7 @@ module game_top (
                                 if (p1_moves[3] == 4'd0) begin
                                     err_no_inventory <= 1'b1;
                                 end else begin
+                                    moves_to_win <= moves_to_win + 4'd1;
                                     p1_moves[3] <= p1_moves[3] - 4'd1;
                                     if (p1_pos > 2'd0) p1_pos <= p1_pos - 2'd1;
                                 end
@@ -192,6 +231,7 @@ module game_top (
                                 if (p1_moves[4] == 4'd0) begin
                                     err_no_inventory <= 1'b1;
                                 end else begin
+                                    moves_to_win <= moves_to_win + 4'd1;
                                     p1_moves[4] <= p1_moves[4] - 4'd1;
                                 end
                             end
@@ -203,28 +243,59 @@ module game_top (
                                 if (p2_moves[0] == 4'd0) begin
                                     err_no_inventory <= 1'b1;
                                 end else begin
+                                    moves_to_win <= moves_to_win + 4'd1;
                                     p2_moves[0] <= p2_moves[0] - 4'd1;
-                                    if (distance == 3'd1)
-                                        p1_health <= p1_health - 2'd1;
-                                    else
+                                    if (distance == 3'd1) begin
+                                        if (p1_health <= 2'd1) begin
+                                            phase <= PHASE_SHOP;
+                                            winner <= 2'b10;
+                                            p1_health <= 2'd3;
+                                            p2_health <= 2'd3;
+                                            p1_credit <= 10'd500;
+                                            p2_credit <= 10'd500;
+                                            p1_pos <= 2'd2;
+                                            p2_pos <= 2'd2;
+                                            p1_moves[0] <= 4'd0; p1_moves[1] <= 4'd0; p1_moves[2] <= 4'd0; p1_moves[3] <= 4'd0; p1_moves[4] <= 4'd0;
+                                            p2_moves[0] <= 4'd0; p2_moves[1] <= 4'd0; p2_moves[2] <= 4'd0; p2_moves[3] <= 4'd0; p2_moves[4] <= 4'd0;
+                                        end else begin
+                                            p1_health <= p1_health - 2'd1;
+                                        end
+                                    end else begin
                                         err_wrong_distance <= 1'b1;
+                                    end
                                 end
                             end
                             ACT_PUNCH: begin
                                 if (p2_moves[1] == 4'd0) begin
                                     err_no_inventory <= 1'b1;
                                 end else begin
+                                    moves_to_win <= moves_to_win + 4'd1;
                                     p2_moves[1] <= p2_moves[1] - 4'd1;
-                                    if (distance == 3'd0)
-                                        p1_health <= p1_health - 2'd2;
-                                    else
+                                    if (distance == 3'd0) begin
+                                        if (p1_health <= 2'd2) begin
+                                            phase <= PHASE_SHOP;
+                                            winner <= 2'b10;
+                                            p1_health <= 2'd3;
+                                            p2_health <= 2'd3;
+                                            p1_credit <= 10'd500;
+                                            p2_credit <= 10'd500;
+                                            p1_pos <= 2'd2;
+                                            p2_pos <= 2'd2;
+                                            p1_moves[0] <= 4'd0; p1_moves[1] <= 4'd0; p1_moves[2] <= 4'd0; p1_moves[3] <= 4'd0; p1_moves[4] <= 4'd0;
+                                            p2_moves[0] <= 4'd0; p2_moves[1] <= 4'd0; p2_moves[2] <= 4'd0; p2_moves[3] <= 4'd0; p2_moves[4] <= 4'd0;
+                                        end else begin
+                                            p1_health <= p1_health - 2'd2;
+                                        end
+                                    end else begin
                                         err_wrong_distance <= 1'b1;
+                                    end
                                 end
                             end
                             ACT_LEFT: begin
                                 if (p2_moves[2] == 4'd0) begin
                                     err_no_inventory <= 1'b1;
                                 end else begin
+                                    moves_to_win <= moves_to_win + 4'd1;
                                     p2_moves[2] <= p2_moves[2] - 4'd1;
                                     if (p2_pos > 2'd0) p2_pos <= p2_pos - 2'd1;
                                 end
@@ -233,6 +304,7 @@ module game_top (
                                 if (p2_moves[3] == 4'd0) begin
                                     err_no_inventory <= 1'b1;
                                 end else begin
+                                    moves_to_win <= moves_to_win + 4'd1;
                                     p2_moves[3] <= p2_moves[3] - 4'd1;
                                     if (p2_pos < 2'd2) p2_pos <= p2_pos + 2'd1;
                                 end
@@ -241,6 +313,7 @@ module game_top (
                                 if (p2_moves[4] == 4'd0) begin
                                     err_no_inventory <= 1'b1;
                                 end else begin
+                                    moves_to_win <= moves_to_win + 4'd1;
                                     p2_moves[4] <= p2_moves[4] - 4'd1;
                                 end
                             end
