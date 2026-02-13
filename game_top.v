@@ -52,6 +52,9 @@ module game_top (
 
     reg [3:0] moves_to_win;
 
+    reg [6:0] p1_discount_mult;
+    reg [6:0] p2_discount_mult;
+
     // Combinational: distance between players
     wire [2:0] distance;
     assign distance = {1'b0, p1_pos} + {1'b0, p2_pos};
@@ -62,6 +65,24 @@ module game_top (
     wire [4:0] p1_grant_onehot;
     wire [4:0] p2_grant_onehot;
 
+    // Combinational discount multiplier mux
+    always @(*) begin
+        if (winner == 2'b01) begin
+            if      (moves_to_win <= 4'd6)  p1_discount_mult = 7'd80;
+            else if (moves_to_win <= 4'd9)  p1_discount_mult = 7'd90;
+            else                            p1_discount_mult = 7'd95;
+            p2_discount_mult = 7'd100;
+        end else if (winner == 2'b10) begin
+            p1_discount_mult = 7'd100;
+            if      (moves_to_win <= 4'd6)  p2_discount_mult = 7'd80;
+            else if (moves_to_win <= 4'd9)  p2_discount_mult = 7'd90;
+            else                            p2_discount_mult = 7'd95;
+        end else begin
+            p1_discount_mult = 7'd100;
+            p2_discount_mult = 7'd100;
+        end
+    end
+
     // Player 1 shop instance
     shop shop_p1 (
         .clk              (clk),
@@ -69,7 +90,7 @@ module game_top (
         .buy_valid        (buy_valid_p1),
         .action_number    (buy_code_p1),
         .credit_in        (p1_credit),
-        .discount_mult    (7'd100),
+        .discount_mult    (p1_discount_mult),
         .Price0           (Price0),
         .Price1           (Price1),
         .Price2           (Price2),
@@ -90,7 +111,7 @@ module game_top (
         .buy_valid        (buy_valid_p2),
         .action_number    (buy_code_p2),
         .credit_in        (p2_credit),
-        .discount_mult    (7'd100),
+        .discount_mult    (p2_discount_mult),
         .Price0           (Price0),
         .Price1           (Price1),
         .Price2           (Price2),
