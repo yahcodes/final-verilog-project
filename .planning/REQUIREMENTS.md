@@ -61,27 +61,27 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SHOP-01 | Phase 1 | Pending |
-| SHOP-02 | Phase 1 | Pending |
-| SHOP-03 | Phase 1 | Pending |
-| SHOP-04 | Phase 1 | Pending |
-| SHOP-05 | Phase 1 | Pending |
-| GAME-01 | Phase 2 | Pending |
-| GAME-02 | Phase 2 | Pending |
-| GAME-03 | Phase 2 | Pending |
-| GAME-04 | Phase 2 | Pending |
-| GAME-05 | Phase 2 | Pending |
-| GAME-06 | Phase 2 | Pending |
-| GAME-07 | Phase 2 | Pending |
-| GAME-08 | Phase 2 | Pending |
-| WIN-01 | Phase 3 | Pending |
-| WIN-02 | Phase 3 | Pending |
-| WIN-03 | Phase 3 | Pending |
-| EC-01 | Phase 3 | Pending |
-| EC-02 | Phase 3 | Pending |
-| DISP-01 | Phase 4 | Pending |
-| DISP-02 | Phase 4 | Pending |
-| TB-01 | Phase 4 | Pending |
+| SHOP-01 | Phase 1: Shop Module | Pending |
+| SHOP-02 | Phase 1: Shop Module | Pending |
+| SHOP-03 | Phase 1: Shop Module | Pending |
+| SHOP-04 | Phase 1: Shop Module | Pending |
+| SHOP-05 | Phase 1: Shop Module | Pending |
+| GAME-01 | Phase 2: Game Core | Pending |
+| GAME-02 | Phase 2: Game Core | Pending |
+| GAME-03 | Phase 2: Game Core | Pending |
+| GAME-04 | Phase 2: Game Core | Pending |
+| GAME-05 | Phase 2: Game Core | Pending |
+| GAME-06 | Phase 2: Game Core | Pending |
+| GAME-07 | Phase 2: Game Core | Pending |
+| GAME-08 | Phase 2: Game Core | Pending |
+| WIN-01 | Phase 3: Win, Restart, and Extra Credit | Pending |
+| WIN-02 | Phase 3: Win, Restart, and Extra Credit | Pending |
+| WIN-03 | Phase 3: Win, Restart, and Extra Credit | Pending |
+| EC-01 | Phase 3: Win, Restart, and Extra Credit | Pending |
+| EC-02 | Phase 3: Win, Restart, and Extra Credit | Pending |
+| DISP-01 | Phase 4: Display and Testbench | Pending |
+| DISP-02 | Phase 4: Display and Testbench | Pending |
+| TB-01 | Phase 4: Display and Testbench | Pending |
 
 **Coverage:**
 - v1 requirements: 21 total
@@ -90,4 +90,4 @@
 
 ---
 *Requirements defined: 2026-02-13*
-*Last updated: 2026-02-13 after initial definition*
+*Last updated: 2026-02-13 — traceability updated after roadmap creation*
