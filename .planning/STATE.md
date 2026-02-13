@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-02-13)
 ## Current Position
 
 Phase: 3 of 4 (Win, Restart, and Extra Credit)
-Plan: 0 of 2 in current phase
-Status: Needs planning
-Last activity: 2026-02-13 - Completed Phase 2 (PLAY phase action logic verified 8/8)
+Plan: 1 of 2 in current phase
+Status: In progress
+Last activity: 2026-02-13 - Completed 03-01 (win detection, moves_to_win counter, start_round restart)
 
-Progress: [████░░░░░░] 40%
+Progress: [█████░░░░░] 50%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 3
-- Average duration: ~4 min
-- Total execution time: ~11 min
+- Total plans completed: 4
+- Average duration: ~3 min
+- Total execution time: ~12 min
 
 **By Phase:**
 
@@ -29,9 +29,10 @@ Progress: [████░░░░░░] 40%
 |-------|-------|-------|----------|
 | 01-shop-module | 1/1 | ~1 min | ~1 min |
 | 02-game-core   | 2/2 | ~10 min | ~5 min |
+| 03-win-restart | 1/2 | ~1 min | ~1 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01, 02-01, 02-02
+- Last 5 plans: 01-01, 02-01, 02-02, 03-01
 - Trend: on track
 
 *Updated after each plan completion*
@@ -54,6 +55,10 @@ Recent decisions affecting current work:
 - [02-02]: inventory decremented BEFORE distance check (wrong-distance attacks still consume inventory)
 - [02-02]: buy task requires 2 posedge cycles (grant latches in shop on edge N, game_top reads on edge N+1)
 - [02-02]: health underflow not guarded in PLAY phase (Phase 3 handles win detection)
+- [03-01]: win detection fires in same cycle as damaging action (no separate END state)
+- [03-01]: moves_to_win increments on every non-err_no_inventory action (all 5 types, both players)
+- [03-01]: start_round resets only winner and moves_to_win (health/credit/pos/moves reset in win handler)
+- [03-01]: win handler resets all state atomically in same always block
 
 ### Pending Todos
 
@@ -66,5 +71,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-13
-Stopped at: Completed 02-02 (PLAY phase action logic + tb_game_core.v)
-Resume file: .planning/phases/03-win-detection/ (next phase)
+Stopped at: Completed 03-01 (win detection, moves_to_win, start_round restart)
+Resume file: .planning/phases/03-win-restart-and-extra-credit/03-02-PLAN.md
