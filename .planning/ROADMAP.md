@@ -12,8 +12,8 @@ Build a 3-file plain Verilog simulation (shop.v, game_top.v, tb_game.v) of a tur
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Shop Module** - Standalone credit/stock/purchase logic in shop.v
-- [ ] **Phase 2: Game Core** - Turn-based FSM, position registers, attack and movement execution
+- [x] **Phase 1: Shop Module** - Standalone credit/stock/purchase logic in shop.v
+- [x] **Phase 2: Game Core** - Turn-based FSM, position registers, attack and movement execution
 - [ ] **Phase 3: Win, Restart, and Extra Credit** - Win detection, round restart, and discount multiplier
 - [ ] **Phase 4: Display and Testbench** - $display logging and comprehensive tb_game.v verification
 
@@ -31,7 +31,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 1 plan
 
 Plans:
-- [ ] 01-01-PLAN.md — Implement shop.v (purchase logic, error outputs, discount, stock) and tb_shop.v (standalone verification)
+- [x] 01-01-PLAN.md — Implement shop.v (purchase logic, error outputs, discount, stock) and tb_shop.v (standalone verification)
 
 ### Phase 2: Game Core
 **Goal**: Two players can take turns executing moves (Kick, Punch, MoveLeft, MoveRight, Wait) with correct distance-based damage, position saturation, inventory enforcement, and turn switching
@@ -46,8 +46,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — Create game_top.v skeleton with registers, shop wiring, SHOP phase logic
-- [ ] 02-02-PLAN.md — Implement PLAY phase action logic (attack, movement, wait, inventory) and verification TB
+- [x] 02-01-PLAN.md — Create game_top.v skeleton with registers, shop wiring, SHOP phase logic
+- [x] 02-02-PLAN.md — Implement PLAY phase action logic (attack, movement, wait, inventory) and verification TB
 
 ### Phase 3: Win, Restart, and Extra Credit
 **Goal**: The game detects wins, supports full round restart, and applies a correct discount to the winner's next shop prices based on moves_to_win
@@ -85,7 +85,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Shop Module | 0/1 | Not started | - |
-| 2. Game Core | 0/2 | Not started | - |
+| 1. Shop Module | 1/1 | Complete | 2026-02-13 |
+| 2. Game Core | 2/2 | Complete | 2026-02-13 |
 | 3. Win, Restart, and Extra Credit | 0/2 | Not started | - |
 | 4. Display and Testbench | 0/2 | Not started | - |

@@ -5,14 +5,14 @@
 See: .planning/PROJECT.md (updated 2026-02-13)
 
 **Core value:** Correctly simulate FSM-based 2-player fighting game with shop, in plain Verilog with $display output
-**Current focus:** Phase 2 - Game Core (complete)
+**Current focus:** Phase 3 - Win, Restart, and Extra Credit
 
 ## Current Position
 
-Phase: 2 of 4 (Game Core)
-Plan: 2 of 2 in current phase
-Status: Phase complete
-Last activity: 2026-02-13 - Completed 02-02-PLAN.md (PLAY phase action logic + testbench)
+Phase: 3 of 4 (Win, Restart, and Extra Credit)
+Plan: 0 of 2 in current phase
+Status: Needs planning
+Last activity: 2026-02-13 - Completed Phase 2 (PLAY phase action logic verified 8/8)
 
 Progress: [████░░░░░░] 40%
 
