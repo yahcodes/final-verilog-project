@@ -106,6 +106,21 @@ module shop (
                 grant_onehot <= 5'b00000;
                 credit_out   <= credit_in;
             end
+            // Shop event display — uses inline subtraction to show post-transaction stock
+            // (NBAs are not yet applied when $display executes in the same always block)
+            if (buy_valid) begin
+                $display("[SHOP] Action=%0d Price=%0d Discounted=%0d | %s | Stock=[%0d,%0d,%0d,%0d,%0d]",
+                    action_number, price_selected, discounted_price,
+                    purchase_success   ? "SUCCESS" :
+                    err_invalid_action ? "ERR_INVALID_ACTION" :
+                    err_credit         ? "ERR_CREDIT" :
+                    err_out_of_stock   ? "ERR_OUT_OF_STOCK" : "NONE",
+                    (purchase_success && action_number==0) ? shop_stock[0]-1 : shop_stock[0],
+                    (purchase_success && action_number==1) ? shop_stock[1]-1 : shop_stock[1],
+                    (purchase_success && action_number==2) ? shop_stock[2]-1 : shop_stock[2],
+                    (purchase_success && action_number==3) ? shop_stock[3]-1 : shop_stock[3],
+                    (purchase_success && action_number==4) ? shop_stock[4]-1 : shop_stock[4]);
+            end
         end
     end
 
