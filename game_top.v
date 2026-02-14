@@ -343,8 +343,18 @@ module game_top (
                     end
                 end
             end
+            if (play_valid) begin
+                $display("[PLAY] P%0d Action=%0d dist=%0d",
+                    turn ? 2 : 1, play_action, distance);
+            end
 
         end
+
+        $display("[TICK] Phase=%s Turn=P%0d | P1: hp=%0d cr=%0d pos=%0d mv=[%0d,%0d,%0d,%0d,%0d] | P2: hp=%0d cr=%0d pos=%0d mv=[%0d,%0d,%0d,%0d,%0d] | winner=%0d mtw=%0d",
+            phase ? "SHOP" : "PLAY", turn ? 2 : 1,
+            p1_health, p1_credit, p1_pos, p1_moves[0], p1_moves[1], p1_moves[2], p1_moves[3], p1_moves[4],
+            p2_health, p2_credit, p2_pos, p2_moves[0], p2_moves[1], p2_moves[2], p2_moves[3], p2_moves[4],
+            winner, moves_to_win);
     end
 
 endmodule
