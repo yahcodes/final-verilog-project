@@ -9,19 +9,19 @@ See: .planning/PROJECT.md (updated 2026-02-13)
 
 ## Current Position
 
-Phase: 3 of 4 (Win, Restart, and Extra Credit)
-Plan: 2 of 2 in current phase
-Status: Phase complete
-Last activity: 2026-02-13 - Completed 03-02 (discount mux in game_top.v + tb_phase3.v verification testbench)
+Phase: 4 of 4 (Display and Testbench)
+Plan: 1 of ? in current phase
+Status: In progress
+Last activity: 2026-02-14 - Completed 04-01 ($display logging added to shop.v and game_top.v)
 
-Progress: [███████░░░] 70%
+Progress: [████████░░] 80%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 5
-- Average duration: ~4 min
-- Total execution time: ~17 min
+- Total plans completed: 6
+- Average duration: ~3 min
+- Total execution time: ~18 min
 
 **By Phase:**
 
@@ -30,9 +30,10 @@ Progress: [███████░░░] 70%
 | 01-shop-module | 1/1 | ~1 min | ~1 min |
 | 02-game-core   | 2/2 | ~10 min | ~5 min |
 | 03-win-restart | 2/2 | ~6 min | ~3 min |
+| 04-display-and-testbench | 1/? | ~1 min | ~1 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01, 02-01, 02-02, 03-01, 03-02
+- Last 6 plans: 01-01, 02-01, 02-02, 03-01, 03-02, 04-01
 - Trend: on track
 
 *Updated after each plan completion*
@@ -62,6 +63,9 @@ Recent decisions affecting current work:
 - [03-02]: discount mux uses combinational always @(*) block driven by winner and moves_to_win regs
 - [03-02]: Test 4 buy sequence uses 3x Wait for P1 (4x exceeds 500 credit budget at Price4=30)
 - [03-02]: tb_phase3 verifies discount indirectly via credit delta (internal signals not exposed)
+- [04-01]: [SHOP] display uses inline subtraction to show post-transaction stock (NBAs not yet applied when $display executes)
+- [04-01]: [PLAY] display placed after if(play_valid) closes inside PLAY else block
+- [04-01]: [TICK] display placed at end of outer non-reset else branch, fires every non-reset posedge clk
 
 ### Pending Todos
 
@@ -73,6 +77,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-13
-Stopped at: Completed 03-02 (discount mux + tb_phase3 — Phase 3 complete)
-Resume file: .planning/phases/04-{next-phase}/{next-plan}-PLAN.md (Phase 4 not yet planned)
+Last session: 2026-02-14
+Stopped at: Completed 04-01 ($display logging — shop.v [SHOP] event log, game_top.v [PLAY] + [TICK] logs)
+Resume file: .planning/phases/04-display-and-testbench/04-02-PLAN.md (next plan in phase 4)
