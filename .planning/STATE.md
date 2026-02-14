@@ -5,7 +5,7 @@
 See: .planning/PROJECT.md (updated 2026-02-13)
 
 **Core value:** Correctly simulate FSM-based 2-player fighting game with shop, in plain Verilog with $display output
-**Current focus:** Phase 3 - Win, Restart, and Extra Credit
+**Current focus:** Phase 4 - Display and Testbench
 
 ## Current Position
 

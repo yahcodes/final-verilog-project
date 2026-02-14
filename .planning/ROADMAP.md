@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Shop Module** - Standalone credit/stock/purchase logic in shop.v
 - [x] **Phase 2: Game Core** - Turn-based FSM, position registers, attack and movement execution
-- [ ] **Phase 3: Win, Restart, and Extra Credit** - Win detection, round restart, and discount multiplier
+- [x] **Phase 3: Win, Restart, and Extra Credit** - Win detection, round restart, and discount multiplier
 - [ ] **Phase 4: Display and Testbench** - $display logging and comprehensive tb_game.v verification
 
 ## Phase Details
@@ -61,8 +61,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 03-01-PLAN.md — Win detection, moves_to_win counter, start_round restart in game_top.v
-- [ ] 03-02-PLAN.md — Discount mux in game_top.v, wire to shops, tb_phase3.v verification
+- [x] 03-01-PLAN.md — Win detection, moves_to_win counter, start_round restart in game_top.v
+- [x] 03-02-PLAN.md — Discount mux in game_top.v, wire to shops, tb_phase3.v verification
 
 ### Phase 4: Display and Testbench
 **Goal**: Every simulation tick and shop event is logged via $display, and tb_game.v exercises all specified scenarios with visible pass/fail output
@@ -87,5 +87,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 |-------|----------------|--------|-----------|
 | 1. Shop Module | 1/1 | Complete | 2026-02-13 |
 | 2. Game Core | 2/2 | Complete | 2026-02-13 |
-| 3. Win, Restart, and Extra Credit | 0/2 | Not started | - |
+| 3. Win, Restart, and Extra Credit | 2/2 | Complete | 2026-02-13 |
 | 4. Display and Testbench | 0/2 | Not started | - |
