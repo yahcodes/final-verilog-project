@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Shop Module** - Standalone credit/stock/purchase logic in shop.v
 - [x] **Phase 2: Game Core** - Turn-based FSM, position registers, attack and movement execution
 - [x] **Phase 3: Win, Restart, and Extra Credit** - Win detection, round restart, and discount multiplier
-- [ ] **Phase 4: Display and Testbench** - $display logging and comprehensive tb_game.v verification
+- [x] **Phase 4: Display and Testbench** - $display logging and comprehensive tb_game.v verification
 
 ## Phase Details
 
@@ -72,11 +72,11 @@ Plans:
   1. After every clock tick, $display prints phase, turn, both players' health, credit, position, and move counters in a readable format
   2. After every shop event, $display prints ActionNumber, price, discounted price, success or specific error type, updated stock, and updated inventory
   3. Simulating tb_game.v in ModelSim/Icarus produces visible output that covers: invalid action error, insufficient credit error, out-of-stock error, movement saturation at both edges, punch at distance 0 dealing 2 damage, kick at distance 1 dealing 1 damage, a full win path with correct winner output, and all three discount bands
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 04-01: Add all $display statements to shop.v and game_top.v (tick log and shop event log)
-- [ ] 04-02: Write tb_game.v with task helpers covering all required scenarios; run full simulation and confirm output
+- [x] 04-01-PLAN.md — Add $display statements to shop.v (shop event log) and game_top.v (tick log + play action log)
+- [x] 04-02-PLAN.md — Write tb_game.v exercising all 8 TB-01 scenarios with PASS/FAIL checks
 
 ## Progress
 
@@ -88,4 +88,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | 1. Shop Module | 1/1 | Complete | 2026-02-13 |
 | 2. Game Core | 2/2 | Complete | 2026-02-13 |
 | 3. Win, Restart, and Extra Credit | 2/2 | Complete | 2026-02-13 |
-| 4. Display and Testbench | 0/2 | Not started | - |
+| 4. Display and Testbench | 2/2 | Complete | 2026-02-15 |
